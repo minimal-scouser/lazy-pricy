@@ -64,15 +64,21 @@
                             Area
                         </button>
                         <div id="area-menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                {% for item in cities %}
+                                <a class="dropdown-item" href="#">
+                                    {{ item }}
+                                </a>
+                                {% endfor %}
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-sm-12">
-                        <button id="btn-loader" class="btn btn-primary" type="button" disabled>
-                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            <span class="sr-only">Loading...</span>
-                        </button>
-                    </div>
+                </div>
+
+                <div class="text-center m-3">
+                    <button id="btn-loader" class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span class="sr-only">Loading...</span>
+                    </button>
                 </div>
 
             </div>
@@ -104,7 +110,7 @@
 
         var selected_area, selected_city;
         $(document).ready(function () {
-            $('#btn-loader').hide()
+            $('#btn-loader').css('display', 'none');
             $('.dropdown-menu').on("click", 'a.dropdown-item', function () {
 
                 if (this.parentNode.id == "city-menu") {
@@ -132,7 +138,7 @@
                 }
 
                 else if (this.parentNode.id == "area-menu") {
-                    $('#btn-loader').show()
+                    $('#btn-loader').css('display', 'block');
                     selected_area = this.text.trim(); //removed 'replace(/ /g, '')'
                     $('#dropdown_area-btn').html(selected_area)
                     $('#veg-info').empty()
@@ -157,7 +163,7 @@
                             }
                         }
                     })
-                    $('#btn-loader').hide()
+                    $('#btn-loader').css('display', 'none');
                 }
             })
 
