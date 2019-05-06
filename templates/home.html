@@ -63,7 +63,8 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Area
                         </button>
-                        <div id="area-menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <div id="area-menu" class="dropdown-menu myscript" aria-labelledby="dropdownMenuButton">
+<a href="">boom</a>
                         </div>
                     </div>
 
@@ -124,7 +125,7 @@
                             var length_of_data = data['areas'].length;
                             $('#area-menu').empty();
                             for (i = 0; i < length_of_data; i++) {
-                                to_add_a = '<a class="dropdown-item" href="#">' + data['areas'][i] + '</a>';
+                                to_add_a = '<a class="dropdown-item btn-disabler" href="#">' + data['areas'][i] + '</a>';
                                 $('#area-menu').append(to_add_a);
                             }
                         }
@@ -165,15 +166,12 @@
             appendMargin = screenHeight - bodyHeight + 25
 
             if (screenHeight > bodyHeight) {
-                $('.at-the-bottom').css('margin-top', appendMargin)
+                $('.at-the-bottom').css('margin-top', appendMargin);
             }
 
-            $('a').click(function(){
-                if (this.parentNode.id == "area-menu"){
+            $('.btn-disabler').click(function(){
                     $('#btn-loader').toggle();
-                }
             })
-
         });
 
     </script>
