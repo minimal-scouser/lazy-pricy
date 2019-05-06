@@ -18,6 +18,7 @@ from django.urls import path
 from costentha.views import getCity, findArea, findPrice
 
 urlpatterns = [
+    path('', getCity)
     path('admin/', admin.site.urls),
     path('lazyPricy/getCity/', getCity),
     path('lazyPricy/getCity/findArea/', findArea),
