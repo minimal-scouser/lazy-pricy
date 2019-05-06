@@ -64,7 +64,6 @@
                             Area
                         </button>
                         <div id="area-menu" class="dropdown-menu myscript" aria-labelledby="dropdownMenuButton">
-<a href="">boom</a>
                         </div>
                     </div>
 
@@ -169,7 +168,7 @@
                 $('.at-the-bottom').css('margin-top', appendMargin);
             }
 
-            $('.btn-disabler').click(function(){
+            $('.myscript').on('click', 'a', function() {
                     $('#btn-loader').toggle();
             })
         });
