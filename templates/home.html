@@ -168,8 +168,18 @@
                 $('.at-the-bottom').css('margin-top', appendMargin);
             }
 
-            $('.myscript').on('click', 'a', function() {
-                    $('#btn-loader').toggle();
+            $('.myscript').on('click', 'a', function () {
+                $('#btn-loader').toggle();
+                var counter = 0;
+                var interval = setInterval(function () {
+                    counter++;
+                    // Display 'counter' wherever you want to display it.
+                    if (counter == 5) {
+                        // Display a login box
+                        clearInterval(interval);
+                    }
+                }, 1000);
+                $('#btn-loader').toggle();
             })
         });
 
