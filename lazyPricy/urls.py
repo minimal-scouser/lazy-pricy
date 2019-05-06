@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from costentha.views import getCity, findArea, findPrice
+from costentha.views import getCity, findArea, findPrice, home
 
 urlpatterns = [
-    path('', getCity),
+    path('', home),
     path('admin/', admin.site.urls),
     path('lazyPricy/getCity/', getCity),
     path('lazyPricy/getCity/findArea/', findArea),

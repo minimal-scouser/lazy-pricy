@@ -5,9 +5,12 @@ import urllib.request
 from bs4 import BeautifulSoup
 
 import json
+from django.shortcuts import redirect
 
 # Create your views here.
 
+def home(request):
+    return redirect('/lazyPricy/getCity')
 
 def getCity(request):
     ''' Scrapes a webpage and returns unique cities in the state of Andhra Pradesh  '''
