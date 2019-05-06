@@ -1,0 +1,30 @@
+@font-face {
+    font-family: poppins-med;
+    src: url("../Poppins/Poppins-Medium.ttf");
+}
+
+@font-face {
+    font-family: poppins-lig;
+    src: url("../Poppins/Poppins-Light.ttf");
+}
+
+@font-face {
+    font-family: ttcommons-med;
+    src: url('../TT-Commons/TTCommons-Medium.ttf');
+}
+
+$fonts: (
+    roboto: #{'Roboto', sans-serif},
+    poppins--medium: #{poppins-med},
+    poppins--light: #{poppins-lig},
+    rubik: #{'Rubik', sans-serif},
+    ttcommons--medium: #{ttcommons-med}
+);
+
+.navbar-brand{
+    font-family: map-get($fonts, poppins--medium);
+}
+
+.heading__normal{
+    font-family: map-get($fonts, roboto);
+}

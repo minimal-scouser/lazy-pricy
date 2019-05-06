@@ -1,0 +1,167 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+
+<html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Cost Entha</title>
+
+<!--Importing BS4
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'bootstrap/jquery-3.4.1.js' %}"></script>
+    <script src="{% static 'bootstrap/popper.min.js' %}"></script>-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+<!--Importing External CSS-->
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="header" data-aos="fade-up">
+            <nav class="navbar navbar-expand-md navbar-light">
+                <div class="container">
+                    <a class="navbar-brand" href="http://127.0.0.1:8000/lazyPricy/getCity/">veggy</a>
+                </div>
+            </nav>
+        </div>
+
+        <div class="container">
+            <div class="page-banner flexy flexy--column">
+                <h5 class="heading__normal text-center">Want to know the prices of Vegetables?</h5>
+
+                <div class="dropdown_container row">
+                    <div class="dropdown col-lg-3 col-sm-12">
+                        <button id="dropdown_city-btn" class="btn dropdown--normal dropdown-toggle" type="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            City
+                        </button>
+
+                        <div id="city-menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            {% for item in cities %}
+                            <a class="dropdown-item" href="#">
+                                {{ item }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown col-lg-3 col-sm-12">
+                    <button id="dropdown_area-btn" class="btn dropdown--normal dropdown-toggle" type="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Area
+                    </button>
+                    <div id="area-menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+                <div class="table_container flexy">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Vegetable Name</th>
+                                <th>Vegetable Price</th>
+                            </tr>
+                        </thead>
+    
+                        <tbody id="veg-info">
+    
+                        </tbody>
+                    </table>
+                </div>
+
+        </div>
+
+        <div class="at-the-bottom container">
+            <p>Data scraped from <a href="http://www.manarythubazar.com/home">manarythubazar</a>. Only they hold all the
+                rights over the data. This site is a mere enhancement to improve the usability.</p>
+        </div>
+    </div>
+
+    <script>
+
+        var selected_area, selected_city;
+        $(document).ready(function () {
+            $('.dropdown-menu').on("click", 'a.dropdown-item', function () {
+
+                if (this.parentNode.id == "city-menu") {
+                    selected_city = this.text.trim(); // removed 'replace(/ /g, '')'
+                    $('#dropdown_city-btn').html(selected_city)
+                    $('#dropdown_area-btn').html('Area')
+                    $.ajax({
+                        type: "GET",
+                        url: "./findArea/",
+                        data: {
+                            state_name: 'andhra',
+                            city_name: selected_city
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            var to_add_a;
+                            var length_of_data = data['areas'].length;
+                            $('#area-menu').empty();
+                            for (i = 0; i < length_of_data; i++) {
+                                to_add_a = '<a class="dropdown-item" href="#">' + data['areas'][i] + '</a>';
+                                $('#area-menu').append(to_add_a);
+                            }
+                        }
+                    })
+                }
+
+                else if (this.parentNode.id == "area-menu") {
+                    selected_area = this.text.trim(); //removed 'replace(/ /g, '')'
+                    $('#dropdown_area-btn').html(selected_area)
+                    $('#veg-info').empty()
+                    $.ajax({
+                        type: "GET",
+                        url: "./findPrice/",
+                        data: {
+                            state_name: 'andhra',
+                            city_name: selected_city,
+                            area_name: selected_area
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            var veg_names = data['veg_name']
+                            var veg_prices = data['veg_price']
+                            var length_of_veg_names = veg_names.length
+                            var to_add
+                            $('#veg-info').empty()
+                            for (i = 0; i < length_of_veg_names; i++) {
+                                to_add = '<tr><td>' + veg_names[i] + '</td>' + '<td>' + veg_prices[i] + '</td></tr>'
+                                $('#veg-info').append(to_add)
+                            }
+                        }
+                    })
+                }
+            })
+
+            screenHeight = $(window).height()
+            bodyHeight = $('html').height()
+
+            appendMargin = screenHeight - bodyHeight + 25
+
+            if (screenHeight > bodyHeight) {
+                alert('boom')
+                $('.at-the-bottom').css('margin-top', appendMargin)
+            }
+        });
+
+    </script>

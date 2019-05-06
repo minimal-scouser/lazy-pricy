@@ -1,0 +1,67 @@
+@import 'global.scss';
+@import 'fonts.scss';
+
+.flexy{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flexy--column{
+    flex-flow: column;
+}
+
+.dropdown_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.dropdown--normal{
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    margin: 1rem 0;
+
+    width: 100%;
+    text-align: left;
+}
+
+.table_container{
+    margin: 3rem 0;
+
+    .table{
+        width: auto;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 1025px) {
+    .page-banner{
+        margin: 5rem 0;
+    }
+}
+
+@media (max-width: 1000px) {
+    .page-banner{
+        margin: 4rem 0;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .page-banner{
+        height: auto;
+        margin: 4rem 0;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+    .page-banner{
+        height: auto;
+        margin: 4rem 0;
+    }
+
+    .form--dynamic{
+        flex-flow: column;
+    }
+}
