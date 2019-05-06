@@ -14,9 +14,7 @@
     <script src="{% static 'bootstrap/popper.min.js' %}"></script>-->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script
-    src="https://code.jquery.com/jquery-3.4.1.js"
-    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -59,33 +57,40 @@
                             {% endfor %}
                         </div>
                     </div>
-                    
+
                     <div class="dropdown col-lg-3 col-sm-12">
-                    <button id="dropdown_area-btn" class="btn dropdown--normal dropdown-toggle" type="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Area
-                    </button>
-                    <div id="area-menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <button id="dropdown_area-btn" class="btn dropdown--normal dropdown-toggle" type="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Area
+                        </button>
+                        <div id="area-menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-12">
+                        <button id="btn-loader" class="btn btn-primary" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </button>
                     </div>
                 </div>
-            </div>
 
             </div>
 
-                <div class="table_container flexy">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Vegetable Name</th>
-                                <th>Vegetable Price</th>
-                            </tr>
-                        </thead>
-    
-                        <tbody id="veg-info">
-    
-                        </tbody>
-                    </table>
-                </div>
+            <div class="table_container flexy">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Vegetable Name</th>
+                            <th>Vegetable Price</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="veg-info">
+
+                    </tbody>
+                </table>
+            </div>
 
         </div>
 
@@ -99,6 +104,7 @@
 
         var selected_area, selected_city;
         $(document).ready(function () {
+            $('#btn-loader').hide()
             $('.dropdown-menu').on("click", 'a.dropdown-item', function () {
 
                 if (this.parentNode.id == "city-menu") {
@@ -126,6 +132,7 @@
                 }
 
                 else if (this.parentNode.id == "area-menu") {
+                    $('#btn-loader').show()
                     selected_area = this.text.trim(); //removed 'replace(/ /g, '')'
                     $('#dropdown_area-btn').html(selected_area)
                     $('#veg-info').empty()
@@ -150,6 +157,7 @@
                             }
                         }
                     })
+                    $('#btn-loader').hide()
                 }
             })
 
