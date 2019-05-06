@@ -31,7 +31,7 @@ SECRET_KEY = '*snba^)v+r#fdcf3p_50**%6v^c&l^!-+btgi-vgz=w84*75qq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['apveggy.herokuapp.com',]
 
 
 # Application definition
