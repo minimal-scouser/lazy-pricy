@@ -64,7 +64,6 @@
                             Area
                         </button>
                         <div id="area-menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
                         </div>
                     </div>
 
@@ -133,7 +132,6 @@
                 }
 
                 else if (this.parentNode.id == "area-menu") {
-                    $('#btn-loader').toggle();
                     selected_area = this.text.trim(); //removed 'replace(/ /g, '')'
                     $('#dropdown_area-btn').html(selected_area)
                     $('#veg-info').empty()
@@ -158,7 +156,6 @@
                             }
                         }
                     })
-                    $('#btn-loader').toggle();
                 }
             })
 
@@ -170,6 +167,13 @@
             if (screenHeight > bodyHeight) {
                 $('.at-the-bottom').css('margin-top', appendMargin)
             }
+
+            $('a').click(function(){
+                if (this.parentNode.id == "area-menu"){
+                    $('#btn-loader').toggle();
+                }
+            })
+
         });
 
     </script>
