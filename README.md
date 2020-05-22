@@ -4,4 +4,4 @@ A data-scraping project that collects data from [manarythubazaar](https://manary
 
 Developed using Django and hosted on heroku.
 
-I have absolutely no rights over the data. Manarythubazaar is the sole owner of the data.
+***Disclaimer**: I have absolutely no rights over the data. Manarythubazaar is the sole owner of the data.*
